@@ -20,7 +20,7 @@ public class QuizManagementServiceApplication {
 		SpringApplication.run(QuizManagementServiceApplication.class, args);
 	}
 
-	@Bean
+	/*@Bean
 	public CommandLineRunner mappingDemo(TopicService topicService,
 										 QuestionService questionService) {
 		return args -> {
@@ -31,7 +31,7 @@ public class QuizManagementServiceApplication {
 			Question question = new Question();
 			question.setQuestion("What is the latest web series from Hoichoi platform?");
 			question.setCorrectAnswer("Hoichoi");
-			/*AnswerOption answerOption1 = new AnswerOption();
+			AnswerOption answerOption1 = new AnswerOption();
 			answerOption1.setQuestion(question);
 			answerOption1.setAnswer("Hoichoi");
 			AnswerOption answerOption2 = new AnswerOption();
@@ -40,10 +40,10 @@ public class QuizManagementServiceApplication {
 			List<AnswerOption> answerOptionList = new ArrayList<>();
 			answerOptionList.add(answerOption1);
 			answerOptionList.add(answerOption2);
-			question.setAnswerOptionList(answerOptionList);*/
+			question.setAnswerOptionList(answerOptionList);
 
 			questionService.addQuestion(question, topicId);
 		};
-	}
+	}*/
 
 }

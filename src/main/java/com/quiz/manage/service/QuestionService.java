@@ -2,7 +2,6 @@ package com.quiz.manage.service;
 
 import com.quiz.manage.entities.Question;
 import com.quiz.manage.entities.Topic;
-import com.quiz.manage.repository.AnswerOptionRepository;
 import com.quiz.manage.repository.QuestionRepository;
 import com.quiz.manage.repository.TopicRepository;
 import org.slf4j.Logger;
@@ -11,15 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Collections;
+
 import java.util.Optional;
 
 @Service
 public class QuestionService {
     Logger logger = LoggerFactory.getLogger(TopicService.class);
-
-    @Autowired
-    private AnswerOptionRepository answerOptionRepository;
 
     @Autowired
     private QuestionRepository questionRepository;
@@ -39,12 +35,6 @@ public class QuestionService {
         logger.info("Adding the question : {}", question.getQuestion());
         Question addedQuestion = questionRepository.save(question);
         logger.info("Question : {} successfully added to the database", question.getQuestion());
-
-        /*logger.info("Adding the question options : {}", question.getAnswerOptionList());
-        Optional.ofNullable(question.getAnswerOptionList())
-                .orElse(Collections.emptyList())
-                .forEach(answerOptionRepository::save);
-        logger.info("Added the question options successfully : {}", question.getAnswerOptionList());*/
 
         logger.info("Finding the topic for the topic id : {}", topicId);
         Optional<Topic> optionalTopic = topicRepository.findById(topicId);
