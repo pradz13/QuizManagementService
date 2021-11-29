@@ -1,19 +1,9 @@
 package com.quiz.manage;
 
-import com.quiz.manage.entities.AnswerOption;
-import com.quiz.manage.entities.Question;
-import com.quiz.manage.entities.Topic;
-import com.quiz.manage.service.QuestionService;
-import com.quiz.manage.service.TopicService;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
-import org.springframework.context.annotation.Bean;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @SpringBootApplication
 @ConfigurationPropertiesScan("com.quiz.manage.configuration")

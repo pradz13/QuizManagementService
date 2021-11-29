@@ -1,8 +1,9 @@
 package com.quiz.manage.entities;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "TOPIC")
@@ -13,8 +14,18 @@ public class Topic {
 
     private String topicName;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "topic")
-    private List<Question> questionList = new ArrayList<>();
+    @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Question> questions = new HashSet<>();
+
+    public void addQuestion(Question question) {
+        questions.add(question);
+        question.setTopic(this);
+    }
+
+    public void removeQuestion(Question question){
+        questions.remove(question);
+        question.setTopic(null);
+    }
 
     public long getTopicId() {
         return topicId;
@@ -32,20 +43,11 @@ public class Topic {
         this.topicName = topicName;
     }
 
-    public List<Question> getQuestionList() {
-        return questionList;
+    public Set<Question> getQuestions() {
+        return questions;
     }
 
-    public void setQuestionList(List<Question> questionList) {
-        this.questionList = questionList;
-    }
-
-    @Override
-    public String toString() {
-        return "Topic{" +
-                "topicId=" + topicId +
-                ", topicName='" + topicName + '\'' +
-                ", questionList=" + questionList +
-                '}';
+    public void setQuestions(Set<Question> questions) {
+        this.questions = questions;
     }
 }

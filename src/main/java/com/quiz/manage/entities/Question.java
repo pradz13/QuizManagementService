@@ -1,8 +1,9 @@
 package com.quiz.manage.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "QUESTION")
@@ -15,10 +16,10 @@ public class Question {
 
     private String correctAnswer;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "question")
-    private List<AnswerOption> answerOptionList = new ArrayList<>();
+    private String answerOptions;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     private Topic topic;
 
     public long getQuestionId() {
@@ -45,12 +46,12 @@ public class Question {
         this.correctAnswer = correctAnswer;
     }
 
-    public List<AnswerOption> getAnswerOptionList() {
-        return answerOptionList;
+    public String getAnswerOptions() {
+        return answerOptions;
     }
 
-    public void setAnswerOptionList(List<AnswerOption> answerOptionList) {
-        this.answerOptionList = answerOptionList;
+    public void setAnswerOptions(String answerOptions) {
+        this.answerOptions = answerOptions;
     }
 
     public Topic getTopic() {
@@ -61,14 +62,5 @@ public class Question {
         this.topic = topic;
     }
 
-    @Override
-    public String toString() {
-        return "Question{" +
-                "questionId=" + questionId +
-                ", question='" + question + '\'' +
-                ", correctAnswer='" + correctAnswer + '\'' +
-                ", answerOptionList=" + answerOptionList +
-                ", topic=" + topic +
-                '}';
-    }
+
 }

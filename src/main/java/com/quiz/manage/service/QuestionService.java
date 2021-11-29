@@ -31,26 +31,20 @@ public class QuestionService {
      * @return returns the instance of the inserted Question in the database
      */
     @Transactional
-    public Question addQuestion(Question question, long topicId) {
-        logger.info("Adding the question : {}", question.getQuestion());
-        Question addedQuestion = questionRepository.save(question);
-        logger.info("Question : {} successfully added to the database", question.getQuestion());
-
+    public Topic addQuestion(Question question, long topicId) {
         logger.info("Finding the topic for the topic id : {}", topicId);
         Optional<Topic> optionalTopic = topicRepository.findById(topicId);
         if (optionalTopic.isPresent()) {
             Topic topic = optionalTopic.get();
             logger.info("Found the topic : {} for the topic id : {}", topic.getTopicName(), topic.getTopicId());
-            logger.info("Associating the question id : {} with topic id : {} and vice versa", addedQuestion.getQuestionId(), topic.getTopicId());
-            topic.getQuestionList().add(addedQuestion);
+            topic.addQuestion(question);
             topicRepository.save(topic);
-            addedQuestion.setTopic(topic);
-            addedQuestion = questionRepository.save(addedQuestion);
-            logger.info("Associating the question id : {} with topic id : {} and vice versa completed successfully", addedQuestion.getQuestionId(), topic.getTopicId());
+            logger.info("Associating the question with topic id : {} completed successfully", topic.getTopicId());
+            return topic;
         } else {
             logger.error("No topic found for topic id : {}", topicId);
             //TODO - Throw Exception and rollback the transaction
         }
-        return addedQuestion;
+        return null;
     }
 }
