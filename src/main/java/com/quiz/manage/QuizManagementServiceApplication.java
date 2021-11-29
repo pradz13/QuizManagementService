@@ -8,17 +8,21 @@ import com.quiz.manage.service.TopicService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.annotation.Bean;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
+@ConfigurationPropertiesScan("com.quiz.manage.configuration")
+@EnableSwagger2
 public class QuizManagementServiceApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(QuizManagementServiceApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(QuizManagementServiceApplication.class, args);
+    }
 
 	/*@Bean
 	public CommandLineRunner mappingDemo(TopicService topicService,

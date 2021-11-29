@@ -38,7 +38,7 @@ public class QuestionService {
 
         logger.info("Finding the topic for the topic id : {}", topicId);
         Optional<Topic> optionalTopic = topicRepository.findById(topicId);
-        if(optionalTopic.isPresent()) {
+        if (optionalTopic.isPresent()) {
             Topic topic = optionalTopic.get();
             logger.info("Found the topic : {} for the topic id : {}", topic.getTopicName(), topic.getTopicId());
             logger.info("Associating the question id : {} with topic id : {} and vice versa", addedQuestion.getQuestionId(), topic.getTopicId());
