@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 
 @Service
@@ -30,5 +31,17 @@ public class TopicService {
         Topic addedTopic = topicRepository.save(topic);
         logger.info("Topic with name : {} successfully added to the database", topic.getTopicName());
         return addedTopic;
+    }
+
+    public Topic getTopicById(long topicId) {
+        logger.info("Getting the topic with id : {}", topicId);
+        Optional<Topic> optionalTopic = topicRepository.findById(topicId);
+        if (optionalTopic.isPresent()) {
+            Topic topic = optionalTopic.get();
+            logger.info("Topic with name : {} successfully retrieved from database for topic id : {}", topic.getTopicName(), topicId);
+            return topic;
+        }
+        logger.error("No topic found for topic id : {}", topicId);
+        return null;
     }
 }

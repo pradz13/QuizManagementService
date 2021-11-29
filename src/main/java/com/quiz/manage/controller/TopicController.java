@@ -3,6 +3,7 @@ package com.quiz.manage.controller;
 import com.quiz.manage.entities.Topic;
 import com.quiz.manage.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,5 +17,10 @@ public class TopicController {
     @PostMapping("/addTopic")
     public Topic addTopic(@RequestBody Topic topic) {
         return topicService.addTopic(topic);
+    }
+
+    @GetMapping("/getTopic")
+    public Topic getTopic(long topicId) {
+        return topicService.getTopicById(topicId);
     }
 }
